@@ -1,11 +1,11 @@
 
 
-class ArucoCode:
+class ArucoCorner:
     """
-    Object which stores the data for one ARuCo tag in a series of images
+    Object which holds corner data for a specific aruco tag id
     """
     
-    def __init__(self, id_num, data_attributes, file_folder=None):
+    def __init__(self, id_num, corners, data_attributes, file_folder=None):
         """ 
 
         """
@@ -13,8 +13,8 @@ class ArucoCode:
         self.name = data_attributes  # TODO: a dictionary that contains the relevant name data -> since different projects will have different attributes for the data
         self.file_loc = file_folder # location of the data, if none, it will do it in the current location
 
-        self.corners = None  # TODO: maybe it should be an empty pandas dataframe? So I can add things to the dataframe easily?
-        self.poses = None
+        self.corners = corners
+
 
     def compute_poses(self):
         """
