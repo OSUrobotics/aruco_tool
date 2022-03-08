@@ -5,7 +5,7 @@ class ArucoCorner:
     Object which holds corner data for a specific aruco tag id
     """
     
-    def __init__(self, id_num, corners, data_attributes, file_folder=None):
+    def __init__(self, id_num, corners, data_attributes=None, file_folder=None):
         """ 
 
         """
@@ -15,6 +15,17 @@ class ArucoCorner:
 
         self.corners = corners
 
+    def get_corners_df():
+        """
+        Return corner data as a dataframe. Columns: x1, y1, x2, y2, ...
+        """
+        pass
+
+    def save_corner_data():
+        """
+        Save corner data, in dataframe form (for starters)
+        """
+        pass
 
     def compute_poses(self):
         """
