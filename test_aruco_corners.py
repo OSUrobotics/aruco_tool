@@ -6,7 +6,7 @@ Specifically testing package's ability to analyze aruco codes in a single image
 import pdb
 import numpy as np
 from cv2 import aruco
-from aruco_tool import CornerFinder
+from aruco_tool import CornerFinder, ArucoCorner
 
 
 # single image analysis
@@ -101,3 +101,48 @@ def test_stream_id_disappears():
     assert np.isnan(data[0][4][0][0]) # expected id to disappear in fifth image
     assert np.isreal(data[0][0][0][0]) # id exists at beginning, checking to see if it works
 
+# test ArucoCorner object creation
+
+def test_correct_aruco_corner_id():
+    """
+    Tests that the ArucoCorner object made by the corner finder is well formed 
+    """
+    t1 = CornerFinder("tests/stream_simple")
+    ids_found = t1.corner_analysis()
+    
+    correct_id = False
+    correct_file_loc = False
+    correct_data_len = False
+
+    for id in ids_found:
+        if id.id == 1:
+            correct_id = True
+        
+            if id.file_loc == "tests/stream_simple":
+                correct_file_loc = True
+
+            if id.data_len == 5:
+                correct_data_len = True
+
+    assert correct_id
+    assert correct_file_loc
+    assert correct_data_len
+
+
+def test_moving_average_trailing_nans():
+    """
+    Tests that the moving average function correctly handles the moving average when there are trailing nans. The trailing nans should still exist, contrary to what pandas rolling average would do on its own
+    """
+    t1 = CornerFinder("tests/stream_disappear")
+    ids_found = t1.corner_analysis()
+
+    zero_index = 1 # grabbing the id 0 aruco code, used to be consistently index 1, but adding for loop just in case
+    for i, a in enumerate(ids_found):
+        if a.id == 0:
+            zero_index = i
+            break
+
+    test_data = ids_found[zero_index]
+    filt_data = test_data._moving_average()
+
+    assert np.all(np.isnan(filt_data[4]) & np.all(np.isnan(filt_data[5])))
