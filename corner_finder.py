@@ -35,10 +35,10 @@ class CornerFinder:
         self.corner_data = all_corners
 
         # now we will separate the corner data into ArucoCorner objects
-        return self._separate_corners(data_name=self.data_name)
+        return self.get_separate_corners(data_name=self.data_name)
 
 
-    def _separate_corners(self, data_name=None):
+    def get_separate_corners(self, data_name=None):
         """
         Package each id into its own ArucoCorner object
         """

@@ -1,4 +1,11 @@
 import cv2
+from cv2 import aruco
+import pdb
+import pandas as pd
+import numpy as np
+from corner_finder import CornerFinder
+from aruco_corner import ArucoCorner
+from pose_detector import PoseDetector
 
 class ArucoFunc:
     """
@@ -23,49 +30,42 @@ class ArucoFunc:
         else:
             self.dist = dist
 
-    def single_image_analysis(file_loc, desired_ids=None):
-        """ 
-        Analyzes a single image for corners
+    def full_analysis_single_id(self, folder, desired_id):
         """
-        image = cv2.imread(f)
+        Full pipeline from img to data 
+        """
+        cf = CornerFinder(folder)
+        c_list = cf.corner_analysis()
 
-        # make image black and white
-        image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        id_c = None
+        for cs in c_list:
+            if cs.id == desired_id:
+                id_c = cs
+                break
+        
+        if id_c is None:
+            return
 
-        # get estimated aruco pose
-        corners, ids, _ = aruco.detectMarkers(image=image_gray, dictionary=aruco_dict,
-                                                parameters=aruco_params, cameraMatrix=self.mtx,
-                                                distCoeff=self.dist)
-
-
-        print(ids)
-        if desired_ids is None:
-            desired_ids = ids
-
-        for idx, id in enumerate(ids):
-            if id in desired_ids:
-                pass
+        pdetect = PoseDetector(id_c, self.mtx, self.dist, 0.03, 1)
+        return pdetect.calc_poses()
 
 
+    def single_image_analysis_single_id(self, file_loc, desired_id=None):
+        """ 
+        Analyzes a single image for a single aruco code, returns the pose
+        """
+        ar_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
+        ar_params = aruco.DetectorParameters_create()
 
-        # print(ids)
-        try:  # TODO: need to redo this for aruco_tool
-            if 2 not in ids:
-                print(ids)
-                print("FOUND WRONG ARUCO CODE, CANT FIND CORRECT ONE")
-                raise ValueError("Did not find correct aruco code.")
+        cf = CornerFinder("")
+        c_data = cf._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params)
+        print(c_data[desired_id])
+        ac = ArucoCorner(0, c_data[desired_id])
+        pdetect = PoseDetector(ac, self.mtx, self.dist, 0.03, 1)
+        return pdetect._calc_single_pose(ac.corners)
 
-            if len(ids) > 1:
-                # TODO: so this works, but maybe add some better tracking of this by considering ids and their index
-                print(f"More than one aruco tag found at frame {i}!")
-                corners = corners[0]
 
-            c = corners[0].squeeze()
-
-        except Exception as e:
-            print(f"Failed to find an aruco code at frame {i}!")
-            print(e)
-            # make corners of None to make sure that we log the failed attempt to find aruco code
-            c = np.array([[None, None], [None, None], [None, None], [None, None]])
-            # pdb.set_trace()
-
+if __name__ == "__main__":
+    ar = ArucoFunc()
+    #print( ar.full_analysis_single_id("tests/stream_disappear", 0) )
+    print( ar.single_image_analysis_single_id("tests/img_single.jpg", 2) )

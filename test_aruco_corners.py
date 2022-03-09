@@ -18,7 +18,7 @@ def test_single_id_found():
     ar_params = aruco.DetectorParameters_create()
 
     t1 = CornerFinder("")
-    data = t1._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params) # contains 0, 1, 2, 3
+    data = t1._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params) # contains 2
     
     assert 2 in data.keys()
     
@@ -165,3 +165,5 @@ def test_moving_average_trailing_nans():
     filt_data = test_data._moving_average()
 
     assert np.all(np.isnan(filt_data[4]) & np.all(np.isnan(filt_data[5])))
+
+# test 1) aruco corner getting of first row and 2) that it reshapes to the correct size

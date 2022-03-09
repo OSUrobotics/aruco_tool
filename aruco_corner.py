@@ -47,6 +47,15 @@ class ArucoCorner:
             yield i, r
 
 
+    def get_init_corner(self):
+        """
+        Gets the first corner that isn't a np.nan value 
+        """
+        for i, r in enumerate(self.corners):
+            if not np.all(np.isnan(r)): # if the row is not all np.nan, then we want it
+                return i, r
+
+
     def save_corners(self, file_name_overwrite=None):
         """
         Saves pose data as a new csv file
