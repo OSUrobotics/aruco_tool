@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from cv2 import aruco
 import pdb
-from .aruco_corner import ArucoCorner
+from aruco_corner import ArucoCorner
 
 
 class CornerFinder:

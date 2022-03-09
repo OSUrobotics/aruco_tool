@@ -23,7 +23,7 @@ class ArucoCorner:
 
     
     def reshape_corners(self):
-        return self.corners.reshape(6, 8)
+        return self.corners.reshape(self.data_len, 8)
 
 
     def gen_corners_df(self):
@@ -34,12 +34,17 @@ class ArucoCorner:
         return pd.DataFrame(reshaped_c, columns=["x1","y1","x2","y2","x3","y3","x4","y4"])
 
 
-    def yield_corners(self):
+    def yield_corners(self, use_reshaped=True):
         """
         Yields the corners for each row, as numpy array
         """
-        for r in self.corners:
-            yield r
+        if use_reshaped:
+            corners_to_use = self.reshape_corners()
+        else:
+            corners_to_use = self.corners
+
+        for i, r in enumerate(corners_to_use):
+            yield i, r
 
 
     def save_corners(self, file_name_overwrite=None):
@@ -98,7 +103,6 @@ class ArucoCorner:
         Overwrites previous moving average calculations.
         :param window_size: size of moving average. Defaults to 3.
         """
-        # TODO: makes a bunch of nan values at end of data
         corners = self.reshape_corners()
 
         # what we want to do is remove any nans at the end of a file (if the id disapeared), run the moving average, and then add them back - the moving average function overwrites nan's at the end of a data stream
