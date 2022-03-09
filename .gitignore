@@ -1,4 +1,5 @@
 dumb_aruco_process.py
+*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
