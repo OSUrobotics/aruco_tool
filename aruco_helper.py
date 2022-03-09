@@ -6,6 +6,9 @@ class ArucoHelper:
 
     @staticmethod
     def view_data_video(acode, include_corners=False, include_pose=False):
+        """
+        Shows image stream as a video. Useful for debugging. 
+        """
         pass
 
 

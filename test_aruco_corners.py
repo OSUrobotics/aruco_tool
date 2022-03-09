@@ -1,5 +1,5 @@
 """
-Specifically testing package's ability to analyze aruco codes in a single image 
+Specifically testing package's ability to analyze image(s) for aruco code corners
 """
 
 #import pytest

@@ -24,8 +24,13 @@ class CornerFinder:
         self.aruco_params = ar_params
         self.desired_ids = desired_ids
 
+        # TODO: need to add processing frequency too?
+
 
     def corner_analysis(self):
+        """
+        Returns set of ArucoCorner objects that store data for each id detected in the data stream 
+        """
         all_corners = self._find_corners(desired_ids=self.desired_ids)
         self.corner_data = all_corners
 

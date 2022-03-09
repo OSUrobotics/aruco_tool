@@ -2,7 +2,7 @@ import cv2
 
 class ArucoFunc:
     """
-    Class which holds aruco corner analysis functions and settings
+    Class which holds aruco corner analysis functions (holistic functions, they include everything for easy start)
     """
     def __init__(self, mtx=None, dist=None):
         """ 

@@ -10,8 +10,9 @@ class ArucoCorner:
     
     def __init__(self, id_num, corners, data_attributes=None, file_folder=None):
         """ 
-        Creates the object. Will also save the data as a pandas dataframe
+        Creates the object
         """
+        # TODO: add aruco dictionary and params to this, so pose_detector can use it later
         self.id = id_num
         self.name = data_attributes  # TODO: a dictionary that contains the relevant name data -> since different projects will have different attributes for the data
         self.file_loc = file_folder # location of the data, if none, it will do it in the current location
