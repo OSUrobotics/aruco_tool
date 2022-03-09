@@ -129,6 +129,25 @@ def test_correct_aruco_corner_id():
     assert correct_data_len
 
 
+def test_moving_average_preceeding_nans():
+    """
+    Tests that the moving average function correctly handles the moving average when there are trailing nans. The trailing nans should still exist, contrary to what pandas rolling average would do on its own
+    """
+    t1 = CornerFinder("tests/stream_appear")
+    ids_found = t1.corner_analysis()
+
+    zero_index = 1 # grabbing the id 0 aruco code, used to be consistently index 1, but adding for loop just in case
+    for i, a in enumerate(ids_found):
+        if a.id == 0:
+            zero_index = i
+            break
+
+    test_data = ids_found[zero_index]
+    filt_data = test_data._moving_average()
+
+    assert np.all(np.isnan(filt_data[0]) & np.all(np.isnan(filt_data[1])))
+
+
 def test_moving_average_trailing_nans():
     """
     Tests that the moving average function correctly handles the moving average when there are trailing nans. The trailing nans should still exist, contrary to what pandas rolling average would do on its own
