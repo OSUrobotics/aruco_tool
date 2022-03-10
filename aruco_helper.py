@@ -1,3 +1,4 @@
+import cv2
 
 class ArucoHelper:
     """
@@ -9,6 +10,18 @@ class ArucoHelper:
         """
         Shows image stream as a video. Useful for debugging. 
         """
-        pass
+        pass 
+
+    @staticmethod
+    def show_image(file_loc, include_corners=False):
+        """
+        Show an image 
+        """
+        img = cv2.imread(file_loc, cv2.IMREAD_COLOR)
+        cv2.imshow("test", img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
 
+if __name__ == "__main__":
+    ArucoHelper.show_image("tests/img_single.jpg")

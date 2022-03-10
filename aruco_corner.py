@@ -64,7 +64,7 @@ class ArucoCorner:
         data = self.gen_corners_df()
 
         if file_name_overwrite is None:
-            file_name = f"{self.id}_corners_{self.file_loc.replace('/', '_')}"
+            file_name = f"{self.id}_ar_corners_{self.file_loc.replace('/', '_')}"
             new_file_name = file_name + ".csv"
 
         else:

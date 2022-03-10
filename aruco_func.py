@@ -6,6 +6,7 @@ import numpy as np
 from corner_finder import CornerFinder
 from aruco_corner import ArucoCorner
 from pose_detector import PoseDetector
+from aruco_loc import ArucoLoc
 
 class ArucoFunc:
     """
@@ -29,6 +30,27 @@ class ArucoFunc:
             self.dist = np.array((0.1611730644, -0.3392379107, 0.0010744837, 0.000905697))
         else:
             self.dist = dist
+        
+        # TODO: add a full and single image analysis for multiple ids
+
+    def load_corners(self, file_loc):
+        """
+        Loads corner data that was saved as a csv previously, returns an ArucoCorner obj with imported data
+        """
+        pass
+
+
+    def load_poses(self, file_loc, id):
+        """
+        Loads pose data that was saved as a csv previously, returns an ArucoLoc obj with imported data
+        """
+        df = pd.read_csv(file_loc)
+        
+        # convert dataframe to numpy array
+        data = df.to_numpy()
+
+        return ArucoLoc(id, data)
+
 
     def full_analysis_single_id(self, folder, desired_id):
         """
