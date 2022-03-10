@@ -10,7 +10,7 @@ setup(
     version='0.3.2',    
     description='Aruco Code pose detection library for use in my lab projects.',
     url='https://github.com/NotCras/aruco_tool/',
-    download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.1.tar.gz',
+    download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.2.tar.gz',
     author='John Morrow',
     author_email='morrowjo@oregonstate.edu',
     license='MIT',
@@ -27,7 +27,7 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',  
         'Operating System :: POSIX :: Linux',        
-        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.8',
     ],
     long_description=long_description,
     long_description_content_type='text/markdown'
