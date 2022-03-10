@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='aruco_tool',
-    version='0.3.0',    
+    version='0.3.1',    
     description='Aruco Code pose detection library for use in my lab projects.',
     url='https://github.com/NotCras/aruco_tool/',
     download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.0.tar.gz',
