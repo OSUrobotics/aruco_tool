@@ -10,7 +10,7 @@ class ArucoHelper:
     Helper class with static functions designed to help a user review or debug images with aruco data 
     """
 
-    @staticmethod()
+    @staticmethod
     def load_corners(self, file_loc):
         """
         Loads corner data that was saved as a csv previously, returns an ArucoCorner obj with imported data
@@ -18,7 +18,7 @@ class ArucoHelper:
         pass
 
 
-    @staticmethod()
+    @staticmethod
     def load_poses(self, file_loc, id):
         """
         Loads pose data that was saved as a csv previously, returns an ArucoLoc obj with imported data
