@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>aruco_tool.corner_finder API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>aruco_tool.corner_finder</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import os 
+import cv2
+import numpy as np
+from pathlib import Path
+from cv2 import aruco
+import pdb
+from .aruco_corner import ArucoCorner
+
+
+class CornerFinder:
+    &#34;&#34;&#34;
+    Takes a set of images and finds the ARuCo tag corners in the image. Will generate ArucoCode objects to store data.
+    Just point it to data, give it ids to care about, then it will do its thing
+    &#34;&#34;&#34;
+    def __init__(self, folder_loc, data_name=None, ar_dict=None, ar_params=None, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes for aruco corners in the folder that you point to. Outputs data in ArucoCorner object form, one for each aruco id detected
+        &#34;&#34;&#34;
+        self.home_directory = Path(__file__).parent.absolute()
+        self.data_folder = folder_loc
+        self.data_name = data_name
+        self.corner_data = None
+        self.aruco_dict = ar_dict
+        self.aruco_params = ar_params
+        self.desired_ids = desired_ids
+
+        # TODO: need to add processing frequency too?
+
+
+    def corner_analysis(self):
+        &#34;&#34;&#34;
+        Returns set of ArucoCorner objects that store data for each id detected in the data stream 
+        &#34;&#34;&#34;
+        all_corners = self._find_corners(desired_ids=self.desired_ids)
+        self.corner_data = all_corners
+
+        # now we will separate the corner data into ArucoCorner objects
+        return self.get_separate_corners(data_name=self.data_name)
+
+
+    def get_separate_corners(self, data_name=None):
+        &#34;&#34;&#34;
+        Package each id into its own ArucoCorner object
+        &#34;&#34;&#34;
+        corners_separated = []
+        for k in self.corner_data:
+            c_data = self.corner_data[k]
+
+            c_obj = ArucoCorner(k, c_data, data_attributes=data_name, file_folder=self.data_folder) # TODO: for now, handled as a string. Later, handle as a dict
+            corners_separated.append(c_obj)
+
+        return corners_separated
+
+
+    def _find_corners(self, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes a set of images and finds the corners 
+        &#34;&#34;&#34;
+        if self.aruco_dict is None:
+            ar_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
+
+        if self.aruco_params is None:
+            ar_params = aruco.DetectorParameters_create()
+
+        img_names = self._get_image_files()
+        num_imgs = len(img_names)
+
+        # store all data here
+        stream_data = dict()
+
+        # predefine the size of the dictionary based on desired ids
+        if desired_ids:
+            for id in desired_ids:
+                stream_data[id] = np.full((num_imgs, 4, 2), np.nan) # make predefined dictionary full of nan values
+        
+        # otherwise, analyze the first image, grab the ids it finds in the first image, and predefine based on that
+        # if an id appears later, we will add it to the stream_data dict manually, with np.nan values for all previous images
+        elif desired_ids is None:
+            first_img = self._analyze_single_image(f&#34;{self.data_folder}/{img_names[0]}&#34;, ar_dict, ar_params)
+
+            for id in first_img.keys():
+                stream_data[id] = np.full((num_imgs, 4, 2), np.nan) # make predefined dictionary full of nan values
+
+
+        for j, im in enumerate(img_names):
+            im_data = self._analyze_single_image(f&#34;{self.data_folder}/{im}&#34;, ar_dict, ar_params, desired_ids=desired_ids)
+
+            if im_data is not None:
+                for k in im_data.keys():
+
+                    if k not in stream_data.keys():
+                        back_list = np.full((num_imgs, 4, 2), np.nan)
+                        stream_data[k] = back_list
+
+                    stream_data[k][j] = im_data[k]
+
+        return stream_data
+
+
+    def _get_image_files(self, idx_limit=None, idx_bot=0):
+        &#34;&#34;&#34;
+        Retrieve list of image names, sorted. Grabs all jpg files and sorts them, so its strongly recommended that image naming scheme adheres to sort function
+        &#34;&#34;&#34;
+        # TODO: be smarter about indices. If bot != 0, then bot-1 | if idx_limit != len(files), then lim + 1
+        os.chdir(self.data_folder)
+        files = [f for f in os.listdir(&#39;.&#39;) if f[-3:] == &#39;jpg&#39;]
+        files.sort()
+
+        #print(f&#34;Num of image files in folder: {len(files)}&#34;)
+        if idx_limit is not None:
+            if idx_bot != 0:
+                idx_bot = idx_bot-1  # this is so that we can include idx_bot
+
+            if idx_limit != len(files):  # so that we can include idx_limit
+                idx_limit = idx_limit + 1
+
+            try:
+                files = files[idx_bot:idx_limit]
+
+            except Exception as e:
+                print(&#34;get_images error: &#34;)
+                print(e)
+
+        # change directory so we can continue in terminal
+        os.chdir(self.home_directory)
+
+        return files
+
+
+    def _analyze_single_image(self, file_name, ar_dict, ar_params, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes a single image... 
+        &#34;&#34;&#34;
+        img = cv2.imread(file_name)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        bboxs, ids, rejected = aruco.detectMarkers(gray, ar_dict, parameters = ar_params)
+
+        id_data = dict()
+        for id, box in zip(ids, bboxs):
+            if desired_ids is not None and id in desired_ids:
+                id_data[id[0]] = box[0]
+            if desired_ids is None:
+                id_data[id[0]] = box[0]
+
+        # double check that all desired ids are accounted for
+        if desired_ids is not None:
+            for idd in desired_ids:
+                if idd not in id_data.keys():
+                    id_data[idd] = np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]])
+        
+        # if it doesn&#39;t find any desired ids, return None
+        # if not id_data:
+        #     id_data = None
+
+        return id_data</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="aruco_tool.corner_finder.CornerFinder"><code class="flex name class">
+<span>class <span class="ident">CornerFinder</span></span>
+<span>(</span><span>folder_loc, data_name=None, ar_dict=None, ar_params=None, desired_ids=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes a set of images and finds the ARuCo tag corners in the image. Will generate ArucoCode objects to store data.
+Just point it to data, give it ids to care about, then it will do its thing</p>
+<p>Analyzes for aruco corners in the folder that you point to. Outputs data in ArucoCorner object form, one for each aruco id detected</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CornerFinder:
+    &#34;&#34;&#34;
+    Takes a set of images and finds the ARuCo tag corners in the image. Will generate ArucoCode objects to store data.
+    Just point it to data, give it ids to care about, then it will do its thing
+    &#34;&#34;&#34;
+    def __init__(self, folder_loc, data_name=None, ar_dict=None, ar_params=None, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes for aruco corners in the folder that you point to. Outputs data in ArucoCorner object form, one for each aruco id detected
+        &#34;&#34;&#34;
+        self.home_directory = Path(__file__).parent.absolute()
+        self.data_folder = folder_loc
+        self.data_name = data_name
+        self.corner_data = None
+        self.aruco_dict = ar_dict
+        self.aruco_params = ar_params
+        self.desired_ids = desired_ids
+
+        # TODO: need to add processing frequency too?
+
+
+    def corner_analysis(self):
+        &#34;&#34;&#34;
+        Returns set of ArucoCorner objects that store data for each id detected in the data stream 
+        &#34;&#34;&#34;
+        all_corners = self._find_corners(desired_ids=self.desired_ids)
+        self.corner_data = all_corners
+
+        # now we will separate the corner data into ArucoCorner objects
+        return self.get_separate_corners(data_name=self.data_name)
+
+
+    def get_separate_corners(self, data_name=None):
+        &#34;&#34;&#34;
+        Package each id into its own ArucoCorner object
+        &#34;&#34;&#34;
+        corners_separated = []
+        for k in self.corner_data:
+            c_data = self.corner_data[k]
+
+            c_obj = ArucoCorner(k, c_data, data_attributes=data_name, file_folder=self.data_folder) # TODO: for now, handled as a string. Later, handle as a dict
+            corners_separated.append(c_obj)
+
+        return corners_separated
+
+
+    def _find_corners(self, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes a set of images and finds the corners 
+        &#34;&#34;&#34;
+        if self.aruco_dict is None:
+            ar_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
+
+        if self.aruco_params is None:
+            ar_params = aruco.DetectorParameters_create()
+
+        img_names = self._get_image_files()
+        num_imgs = len(img_names)
+
+        # store all data here
+        stream_data = dict()
+
+        # predefine the size of the dictionary based on desired ids
+        if desired_ids:
+            for id in desired_ids:
+                stream_data[id] = np.full((num_imgs, 4, 2), np.nan) # make predefined dictionary full of nan values
+        
+        # otherwise, analyze the first image, grab the ids it finds in the first image, and predefine based on that
+        # if an id appears later, we will add it to the stream_data dict manually, with np.nan values for all previous images
+        elif desired_ids is None:
+            first_img = self._analyze_single_image(f&#34;{self.data_folder}/{img_names[0]}&#34;, ar_dict, ar_params)
+
+            for id in first_img.keys():
+                stream_data[id] = np.full((num_imgs, 4, 2), np.nan) # make predefined dictionary full of nan values
+
+
+        for j, im in enumerate(img_names):
+            im_data = self._analyze_single_image(f&#34;{self.data_folder}/{im}&#34;, ar_dict, ar_params, desired_ids=desired_ids)
+
+            if im_data is not None:
+                for k in im_data.keys():
+
+                    if k not in stream_data.keys():
+                        back_list = np.full((num_imgs, 4, 2), np.nan)
+                        stream_data[k] = back_list
+
+                    stream_data[k][j] = im_data[k]
+
+        return stream_data
+
+
+    def _get_image_files(self, idx_limit=None, idx_bot=0):
+        &#34;&#34;&#34;
+        Retrieve list of image names, sorted. Grabs all jpg files and sorts them, so its strongly recommended that image naming scheme adheres to sort function
+        &#34;&#34;&#34;
+        # TODO: be smarter about indices. If bot != 0, then bot-1 | if idx_limit != len(files), then lim + 1
+        os.chdir(self.data_folder)
+        files = [f for f in os.listdir(&#39;.&#39;) if f[-3:] == &#39;jpg&#39;]
+        files.sort()
+
+        #print(f&#34;Num of image files in folder: {len(files)}&#34;)
+        if idx_limit is not None:
+            if idx_bot != 0:
+                idx_bot = idx_bot-1  # this is so that we can include idx_bot
+
+            if idx_limit != len(files):  # so that we can include idx_limit
+                idx_limit = idx_limit + 1
+
+            try:
+                files = files[idx_bot:idx_limit]
+
+            except Exception as e:
+                print(&#34;get_images error: &#34;)
+                print(e)
+
+        # change directory so we can continue in terminal
+        os.chdir(self.home_directory)
+
+        return files
+
+
+    def _analyze_single_image(self, file_name, ar_dict, ar_params, desired_ids=None):
+        &#34;&#34;&#34;
+        Analyzes a single image... 
+        &#34;&#34;&#34;
+        img = cv2.imread(file_name)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        bboxs, ids, rejected = aruco.detectMarkers(gray, ar_dict, parameters = ar_params)
+
+        id_data = dict()
+        for id, box in zip(ids, bboxs):
+            if desired_ids is not None and id in desired_ids:
+                id_data[id[0]] = box[0]
+            if desired_ids is None:
+                id_data[id[0]] = box[0]
+
+        # double check that all desired ids are accounted for
+        if desired_ids is not None:
+            for idd in desired_ids:
+                if idd not in id_data.keys():
+                    id_data[idd] = np.array([[np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan], [np.nan, np.nan]])
+        
+        # if it doesn&#39;t find any desired ids, return None
+        # if not id_data:
+        #     id_data = None
+
+        return id_data</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="aruco_tool.corner_finder.CornerFinder.corner_analysis"><code class="name flex">
+<span>def <span class="ident">corner_analysis</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns set of ArucoCorner objects that store data for each id detected in the data stream</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def corner_analysis(self):
+    &#34;&#34;&#34;
+    Returns set of ArucoCorner objects that store data for each id detected in the data stream 
+    &#34;&#34;&#34;
+    all_corners = self._find_corners(desired_ids=self.desired_ids)
+    self.corner_data = all_corners
+
+    # now we will separate the corner data into ArucoCorner objects
+    return self.get_separate_corners(data_name=self.data_name)</code></pre>
+</details>
+</dd>
+<dt id="aruco_tool.corner_finder.CornerFinder.get_separate_corners"><code class="name flex">
+<span>def <span class="ident">get_separate_corners</span></span>(<span>self, data_name=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Package each id into its own ArucoCorner object</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_separate_corners(self, data_name=None):
+    &#34;&#34;&#34;
+    Package each id into its own ArucoCorner object
+    &#34;&#34;&#34;
+    corners_separated = []
+    for k in self.corner_data:
+        c_data = self.corner_data[k]
+
+        c_obj = ArucoCorner(k, c_data, data_attributes=data_name, file_folder=self.data_folder) # TODO: for now, handled as a string. Later, handle as a dict
+        corners_separated.append(c_obj)
+
+    return corners_separated</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="aruco_tool" href="index.html">aruco_tool</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="aruco_tool.corner_finder.CornerFinder" href="#aruco_tool.corner_finder.CornerFinder">CornerFinder</a></code></h4>
+<ul class="">
+<li><code><a title="aruco_tool.corner_finder.CornerFinder.corner_analysis" href="#aruco_tool.corner_finder.CornerFinder.corner_analysis">corner_analysis</a></code></li>
+<li><code><a title="aruco_tool.corner_finder.CornerFinder.get_separate_corners" href="#aruco_tool.corner_finder.CornerFinder.get_separate_corners">get_separate_corners</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

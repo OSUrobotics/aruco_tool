@@ -3,10 +3,10 @@ from cv2 import aruco
 import pdb
 import pandas as pd
 import numpy as np
-from corner_finder import CornerFinder
-from aruco_corner import ArucoCorner
-from pose_detector import PoseDetector
-from aruco_loc import ArucoLoc
+from .corner_finder import CornerFinder
+from .aruco_corner import ArucoCorner
+from .pose_detector import PoseDetector
+from .aruco_loc import ArucoLoc
 
 class ArucoFunc:
     """

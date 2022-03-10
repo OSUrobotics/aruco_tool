@@ -1,7 +1,7 @@
 import cv2
 from cv2 import aruco
 import pdb
-from corner_finder import CornerFinder
+from .corner_finder import CornerFinder
 
 class ArucoHelper:
     """

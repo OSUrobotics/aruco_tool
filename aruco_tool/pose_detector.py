@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from cv2 import aruco
 import pdb
-from aruco_loc import ArucoLoc
+from .aruco_loc import ArucoLoc
 
 # for me:
 """ 
