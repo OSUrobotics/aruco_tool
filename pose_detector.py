@@ -82,9 +82,9 @@ class PoseDetector:
             except Exception as e:
                 #print(f"Error with ARuco corners in image {i}.")
                 #print(e)
-                rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
-                translation_val = np.nan
-                rotation_val = np.nan
+                # rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
+                # translation_val = np.nan
+                # rotation_val = np.nan
                 row_data = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
             
             # put into numpy array

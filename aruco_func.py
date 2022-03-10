@@ -12,7 +12,7 @@ class ArucoFunc:
     """
     Class which holds aruco corner analysis functions (holistic functions, they include everything for easy start)
     """
-    def __init__(self, mtx=None, dist=None):
+    def __init__(self, mtx=None, dist=None, marker_side_dims=None):
         """ 
         Input camera settings for aruco analysis
         """
@@ -30,6 +30,11 @@ class ArucoFunc:
             self.dist = np.array((0.1611730644, -0.3392379107, 0.0010744837, 0.000905697))
         else:
             self.dist = dist
+
+        if marker_side_dims is None:
+            self.marker_side_dims = 0.03
+        else:
+            self.marker_side_dims = marker_side_dims
         
         # TODO: add a full and single image analysis for multiple ids
 
@@ -44,7 +49,7 @@ class ArucoFunc:
         """
         Loads pose data that was saved as a csv previously, returns an ArucoLoc obj with imported data
         """
-        df = pd.read_csv(file_loc)
+        df = pd.read_csv(file_loc)  # TODO: should I parse the file_loc for information like id and folder loc?
         
         # convert dataframe to numpy array
         data = df.to_numpy()
@@ -68,7 +73,7 @@ class ArucoFunc:
         if id_c is None:
             return
 
-        pdetect = PoseDetector(id_c, self.mtx, self.dist, 0.03, 1)
+        pdetect = PoseDetector(id_c, self.mtx, self.dist, self.marker_side_dims, 1)
         return pdetect.calc_poses()
 
 
@@ -83,7 +88,7 @@ class ArucoFunc:
         c_data = cf._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params)
         print(c_data[desired_id])
         ac = ArucoCorner(0, c_data[desired_id])
-        pdetect = PoseDetector(ac, self.mtx, self.dist, 0.03, 1)
+        pdetect = PoseDetector(ac, self.mtx, self.dist, self.marker_side_dims, 1)
         return pdetect._calc_single_pose(ac.corners)
 
 
