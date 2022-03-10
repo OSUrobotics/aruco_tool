@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from cv2 import aruco
 import pdb
-from .aruco_corner import ArucoCorner
+from aruco_corner import ArucoCorner
 
 
 class CornerFinder:
@@ -24,16 +24,21 @@ class CornerFinder:
         self.aruco_params = ar_params
         self.desired_ids = desired_ids
 
+        # TODO: need to add processing frequency too?
+
 
     def corner_analysis(self):
+        """
+        Returns set of ArucoCorner objects that store data for each id detected in the data stream 
+        """
         all_corners = self._find_corners(desired_ids=self.desired_ids)
         self.corner_data = all_corners
 
         # now we will separate the corner data into ArucoCorner objects
-        return self._separate_corners(data_name=self.data_name)
+        return self.get_separate_corners(data_name=self.data_name)
 
 
-    def _separate_corners(self, data_name=None):
+    def get_separate_corners(self, data_name=None):
         """
         Package each id into its own ArucoCorner object
         """
@@ -149,8 +154,3 @@ class CornerFinder:
         #     id_data = None
 
         return id_data
-
-if __name__ == "__main__":
-    t1 = CornerFinder("tests/stream_appear/")
-    data = t1._find_corners()
-    print(data[0])
