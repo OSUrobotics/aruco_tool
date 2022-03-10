@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='aruco_tool',
-    version='0.3.2',    
+    version='0.3.3',    
     description='Aruco Code pose detection library for use in my lab projects.',
     url='https://github.com/NotCras/aruco_tool/',
     download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.3.tar.gz',
