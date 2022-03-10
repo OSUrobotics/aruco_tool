@@ -37,7 +37,7 @@ class PoseDetector:
         """
         poses = self.calc_poses()
 
-        return ArucoLoc(self.id, poses, file_folder=self.aruco_corner.file_loc)
+        return ArucoLoc(self.id, poses, file_folder=self.aruco_corner.folder_loc)
 
 
     def calc_poses(self, rel_pos=True):
