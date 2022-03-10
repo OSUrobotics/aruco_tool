@@ -74,7 +74,7 @@ class ArucoFunc:
             return
 
         pdetect = PoseDetector(id_c, self.mtx, self.dist, self.marker_side_dims, 1)
-        return pdetect.calc_poses()
+        return pdetect.find_marker_locations()
 
 
     def single_image_analysis_single_id(self, file_loc, desired_id=None):
@@ -85,9 +85,48 @@ class ArucoFunc:
         ar_params = aruco.DetectorParameters_create()
 
         cf = CornerFinder("")
-        c_data = cf._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params)
-        print(c_data[desired_id])
+        c_data = cf._analyze_single_image(file_loc, ar_dict, ar_params)
+
         ac = ArucoCorner(0, c_data[desired_id])
         pdetect = PoseDetector(ac, self.mtx, self.dist, self.marker_side_dims, 1)
         return pdetect._calc_single_pose(ac.corners)
+
+
+    def full_analysis(self, folder, desired_ids=None):
+        """
+        Full pipeline from img to data, with relative positioning from initial pose
+        """
+        cf = CornerFinder(folder, desired_ids=desired_ids)
+        c_list = cf.corner_analysis()
+
+        aruco_locs = []
+
+        for id_c in c_list:
+            pdetect = PoseDetector(id_c, self.mtx, self.dist, self.marker_side_dims, 1)
+            ar_loc = pdetect.find_marker_locations()
+            aruco_locs.append(ar_loc)
+
+        return aruco_locs
+
+
+    def single_image_analysis(self, file_loc, desired_ids=None):
+        """ 
+        Analyzes a single image for a single aruco code, returns the pose
+        """
+        ar_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250)
+        ar_params = aruco.DetectorParameters_create()
+
+        cf = CornerFinder("")
+        c_data = cf._analyze_single_image(file_loc, ar_dict, ar_params, desired_ids=desired_ids)
+
+        aruco_locs = dict()
+        ac = ArucoCorner(0, c_data[0]) # this is a dummy ac obj, needed for pose detector
+        pdetect = PoseDetector(ac, self.mtx, self.dist, self.marker_side_dims, 1)
+
+        for k in c_data:
+            k_pose = pdetect._calc_single_pose(c_data[k])
+
+            aruco_locs[k] = k_pose
+
+        return aruco_locs
 

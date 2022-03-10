@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import pdb
 
 class ArucoLoc:
     """
@@ -129,9 +131,8 @@ class ArucoLoc:
         """
         Plots translation data (x, y)
         """
-        # pdb.set_trace()
         poses = self.gen_poses_df()
-        poses.plot(x="x", y="y")
+        plt.plot(poses['x'], poses['y'])
 
 
 
