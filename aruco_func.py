@@ -32,7 +32,7 @@ class ArucoFunc:
 
     def full_analysis_single_id(self, folder, desired_id):
         """
-        Full pipeline from img to data 
+        Full pipeline from img to data, with relative positioning from initial pose
         """
         cf = CornerFinder(folder)
         c_list = cf.corner_analysis()
@@ -67,5 +67,5 @@ class ArucoFunc:
 
 if __name__ == "__main__":
     ar = ArucoFunc()
-    #print( ar.full_analysis_single_id("tests/stream_disappear", 0) )
-    print( ar.single_image_analysis_single_id("tests/img_single.jpg", 2) )
+    print( ar.full_analysis_single_id("tests/stream_appear", 1) )
+    #print( ar.single_image_analysis_single_id("tests/img_single.jpg", 2) )

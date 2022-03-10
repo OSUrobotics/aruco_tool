@@ -49,11 +49,12 @@ class PoseDetector:
         # go through corners, calculate poses
         for i, next_corners in self.aruco_corner.yield_corners(use_reshaped=False):
             try:
-                # print(f"Estimating pose in image {i}")
-                pdb.set_trace()
-                [next_rvec, next_tvec] = self._calc_single_pose([next_corners])
+                # if its all nans, just skip calculation
+                if np.all(np.isnan(next_corners)):
+                    raise Exception("Row of nans, skipping calculation")
 
-                #print(f"calculating angle, {next_corners}")
+                [next_rvec, next_tvec] = self._calc_single_pose(next_corners)
+
                 rel_angle = self._angle_between(init_corners[0] - init_corners[2], next_corners[0] - next_corners[2])
                 rel_rvec, rel_tvec = self._relative_position(init_rvec, init_tvec, next_rvec, next_tvec)
 
@@ -66,19 +67,23 @@ class PoseDetector:
                 cv2.Rodrigues(rel_rvec, rotM, jacobian=0)
                 ypr = cv2.RQDecomp3x3(rotM)  # TODO: not sure what we did with this earlier... need to check
 
-                total_successes += 1
+                row_data = [rel_tvec[0][0], rel_tvec[1][0], rel_tvec[2][0], translation_val, rel_rvec[0][0], rel_rvec[1][0], rel_rvec[2][0], rotation_val]
+                
+                #total_successes += 1
             except Exception as e:
                 print(f"Error with ARuco corners in image {i}.")
                 print(e)
                 rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
                 translation_val = np.nan
                 rotation_val = np.nan
+                row_data = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
             
             # put into numpy array
             # tvec (3), tmag, rvec (3), rmag
-            pose_data[i] = [tvec[0], tvec[1], tvec[2], translation_val, rvec[0], rvec[1], rvec[2], rotation_val]
+            
+            pose_data[i] = row_data
 
-        return pose_data
+        return np.around(pose_data, decimals=3)
 
 
     def _calc_single_pose(self, corner_set):
@@ -87,12 +92,12 @@ class PoseDetector:
         """
         # if np.all(np.isnan(corner_set)):
         #     print("all are nan")
-
+        
         rvec, tvec, _ = aruco.estimatePoseSingleMarkers([corner_set], self.marker_side_dims, self.mtx, self.dist)
 
         pose = np.concatenate((rvec, tvec))
         
-        return pose
+        return pose #[rvec, tvec]
 
 
     def _unit_vector(self, vector):
