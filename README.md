@@ -16,7 +16,7 @@ When entering file folder locations, please use absolute paths for now.
 
 ### Finding corners
 ```python
-    cf = CornerFinder("[Enter Folder with Images Here]")
+    cf = CornerFinder("[Enter Folder with Images Here]", data_name=None, ar_dict=None, ar_params=None, desired_ids=None)
     ids_found = cf.corner_analysis()
 ```
 
