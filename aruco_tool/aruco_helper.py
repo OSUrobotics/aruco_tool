@@ -43,5 +43,3 @@ class ArucoHelper:
         cv2.destroyAllWindows()
 
 
-if __name__ == "__main__":
-    ArucoHelper.show_image("tests/img_single.jpg", include_corners=True)

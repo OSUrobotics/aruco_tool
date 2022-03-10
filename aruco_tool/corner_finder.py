@@ -154,8 +154,3 @@ class CornerFinder:
         #     id_data = None
 
         return id_data
-
-if __name__ == "__main__":
-    t1 = CornerFinder("tests/stream_appear/")
-    data = t1._find_corners()
-    print(data[0])

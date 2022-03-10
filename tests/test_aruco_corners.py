@@ -18,7 +18,7 @@ def test_single_id_found():
     ar_params = aruco.DetectorParameters_create()
 
     t1 = CornerFinder("")
-    data = t1._analyze_single_image("tests/img_single.jpg", ar_dict, ar_params) # contains 2
+    data = t1._analyze_single_image("img_single.jpg", ar_dict, ar_params) # contains 2
     
     assert 2 in data.keys()
     
@@ -31,7 +31,7 @@ def test_single_id_cant_find():
     ar_params = aruco.DetectorParameters_create()
 
     t1 = CornerFinder("")
-    data = t1._analyze_single_image("tests/img_mult.jpg", ar_dict, ar_params, desired_ids=[0, 1, 5]) # contains 0, 1, 2, 3
+    data = t1._analyze_single_image("img_mult.jpg", ar_dict, ar_params, desired_ids=[0, 1, 5]) # contains 0, 1, 2, 3
     
     assert 5 in data.keys()
     assert np.isnan(data[5][0][0])
@@ -45,7 +45,7 @@ def test_single_id_not_desired():
     ar_params = aruco.DetectorParameters_create()
 
     t1 = CornerFinder("")
-    data = t1._analyze_single_image("tests/img_mult.jpg", ar_dict, ar_params, desired_ids=[0, 1, 2, 5]) # contains 0, 1, 2, 3
+    data = t1._analyze_single_image("img_mult.jpg", ar_dict, ar_params, desired_ids=[0, 1, 2, 5]) # contains 0, 1, 2, 3
     
     assert 3 not in data.keys()
 
@@ -56,12 +56,12 @@ def test_stream_files():
     Tests that it finds the correct number of files in a folder
     """
 
-    t1 = CornerFinder("tests/stream_simple")
+    t1 = CornerFinder("stream_simple")
     files = t1._get_image_files()
 
     assert len(files) == 5
 
-    t2 = CornerFinder("tests/stream_mult")
+    t2 = CornerFinder("stream_mult")
     files2 = t2._get_image_files()
 
     assert len(files2) == 6
@@ -72,7 +72,7 @@ def test_stream_found_id():
     """
     Tests that the desired id we found has the correct number of corner sets to image numbers 
     """
-    t1 = CornerFinder("tests/stream_simple")
+    t1 = CornerFinder("stream_simple")
     data = t1._find_corners(desired_ids=[2])
 
     assert 2 in data.keys()
@@ -82,7 +82,7 @@ def test_stream_id_appears():
     """
     Tests that an id that appears midway through a stream has nan values placed for previous frames it wasn't in, and values where it is 
     """
-    t1 = CornerFinder("tests/stream_appear")
+    t1 = CornerFinder("stream_appear")
     data = t1._find_corners()
 
     assert 0 in data.keys()
@@ -94,7 +94,7 @@ def test_stream_id_disappears():
     """
     Tests that an id that disappears midway through a stream has nan values placed for subsequent frames it wasn't in, and values where it is 
     """
-    t1 = CornerFinder("tests/stream_disappear")
+    t1 = CornerFinder("stream_disappear")
     data = t1._find_corners()
 
     assert 0 in data.keys()
@@ -107,7 +107,7 @@ def test_correct_aruco_corner_id():
     """
     Tests that the ArucoCorner object made by the corner finder is well formed 
     """
-    t1 = CornerFinder("tests/stream_simple")
+    t1 = CornerFinder("stream_simple")
     ids_found = t1.corner_analysis()
     
     correct_id = False
@@ -118,7 +118,7 @@ def test_correct_aruco_corner_id():
         if id.id == 1:
             correct_id = True
         
-            if id.file_loc == "tests/stream_simple":
+            if id.file_loc == "stream_simple":
                 correct_file_loc = True
 
             if id.data_len == 5:
@@ -133,7 +133,7 @@ def test_moving_average_preceeding_nans():
     """
     Tests that the moving average function correctly handles the moving average when there are trailing nans. The trailing nans should still exist, contrary to what pandas rolling average would do on its own
     """
-    t1 = CornerFinder("tests/stream_appear")
+    t1 = CornerFinder("stream_appear")
     ids_found = t1.corner_analysis()
 
     zero_index = 1 # grabbing the id 0 aruco code, used to be consistently index 1, but adding for loop just in case
@@ -152,7 +152,7 @@ def test_moving_average_trailing_nans():
     """
     Tests that the moving average function correctly handles the moving average when there are trailing nans. The trailing nans should still exist, contrary to what pandas rolling average would do on its own
     """
-    t1 = CornerFinder("tests/stream_disappear")
+    t1 = CornerFinder("stream_disappear")
     ids_found = t1.corner_analysis()
 
     zero_index = 1 # grabbing the id 0 aruco code, used to be consistently index 1, but adding for loop just in case

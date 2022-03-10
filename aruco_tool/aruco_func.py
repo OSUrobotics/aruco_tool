@@ -91,8 +91,3 @@ class ArucoFunc:
         pdetect = PoseDetector(ac, self.mtx, self.dist, self.marker_side_dims, 1)
         return pdetect._calc_single_pose(ac.corners)
 
-
-if __name__ == "__main__":
-    ar = ArucoFunc()
-    print( ar.full_analysis_single_id("tests/stream_appear", 1) )
-    #print( ar.single_image_analysis_single_id("tests/img_single.jpg", 2) )
