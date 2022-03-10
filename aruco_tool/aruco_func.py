@@ -38,24 +38,6 @@ class ArucoFunc:
         
         # TODO: add a full and single image analysis for multiple ids
 
-    def load_corners(self, file_loc):
-        """
-        Loads corner data that was saved as a csv previously, returns an ArucoCorner obj with imported data
-        """
-        pass
-
-
-    def load_poses(self, file_loc, id):
-        """
-        Loads pose data that was saved as a csv previously, returns an ArucoLoc obj with imported data
-        """
-        df = pd.read_csv(file_loc)  # TODO: should I parse the file_loc for information like id and folder loc?
-        
-        # convert dataframe to numpy array
-        data = df.to_numpy()
-
-        return ArucoLoc(id, data)
-
 
     def full_analysis_single_id(self, folder, desired_id):
         """

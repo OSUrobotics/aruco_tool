@@ -15,7 +15,7 @@ class ArucoCorner:
         # TODO: add aruco dictionary and params to this, so pose_detector can use it later
         self.id = id_num
         self.name = data_attributes  # TODO: a dictionary that contains the relevant name data -> since different projects will have different attributes for the data
-        self.file_loc = file_folder # location of the data, if none, it will do it in the current location
+        self.folder_loc = file_folder # location of the data, if none, it will do it in the current location
 
         self.corners = corners
         self.data_len = len(corners)
@@ -64,7 +64,7 @@ class ArucoCorner:
         data = self.gen_corners_df()
 
         if file_name_overwrite is None:
-            file_name = f"{self.id}_ar_corners_{self.file_loc.replace('/', '_')}"
+            file_name = f"{self.id}_ar_corners_{self.folder_loc.replace('/', '_')}"
             new_file_name = file_name + ".csv"
 
         else:

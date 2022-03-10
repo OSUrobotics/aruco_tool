@@ -2,11 +2,34 @@ import cv2
 from cv2 import aruco
 import pdb
 from .corner_finder import CornerFinder
+from .aruco_corner import ArucoCorner
+from .aruco_loc import ArucoLoc
 
 class ArucoHelper:
     """
     Helper class with static functions designed to help a user review or debug images with aruco data 
     """
+
+    @staticmethod()
+    def load_corners(self, file_loc):
+        """
+        Loads corner data that was saved as a csv previously, returns an ArucoCorner obj with imported data
+        """
+        pass
+
+
+    @staticmethod()
+    def load_poses(self, file_loc, id):
+        """
+        Loads pose data that was saved as a csv previously, returns an ArucoLoc obj with imported data
+        """
+        df = pd.read_csv(file_loc)  # TODO: should I parse the file_loc for information like id and folder loc?
+        
+        # convert dataframe to numpy array
+        data = df.to_numpy()
+
+        return ArucoLoc(id, data)
+
 
     @staticmethod
     def view_data_video(acode, include_corners=False, include_pose=False):
@@ -15,8 +38,9 @@ class ArucoHelper:
         """
         pass
 
+
     @staticmethod
-    def show_image(file_loc, include_corners=False, marker_size=2):
+    def show_image(file_loc, include_corners=False, marker_size=3):
         """
         Show an image 
         """
