@@ -1,3 +1,13 @@
+"""
+aruco_tool
+
+Aruco Code pose detection library for use in my lab projects. 
+"""
+
+__version__ = "0.1.0"
+__author__ = 'John Morrow'
+__credits__ = 'Oregon State University'
+
 from .corner_finder import CornerFinder
 from .aruco_corner import ArucoCorner
 from .pose_detector import PoseDetector
