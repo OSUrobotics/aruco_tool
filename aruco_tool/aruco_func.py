@@ -59,7 +59,7 @@ class ArucoFunc:
         return pdetect.find_marker_locations()
 
 
-    def single_image_analysis_single_id(self, file_loc, desired_id=None):
+    def single_image_analysis_single_id(self, file_loc, desired_id):
         """ 
         Analyzes a single image for a single aruco code, returns the pose
         """
@@ -102,7 +102,8 @@ class ArucoFunc:
         c_data = cf._analyze_single_image(file_loc, ar_dict, ar_params, desired_ids=desired_ids)
 
         aruco_locs = dict()
-        ac = ArucoCorner(0, c_data[0]) # this is a dummy ac obj, needed for pose detector
+        temp_key = list(c_data.keys())[0]
+        ac = ArucoCorner(0, c_data[temp_key]) # this is a dummy ac obj, needed for pose detector
         pdetect = PoseDetector(ac, self.mtx, self.dist, self.marker_side_dims, 1)
 
         for k in c_data:
@@ -111,4 +112,3 @@ class ArucoFunc:
             aruco_locs[k] = k_pose
 
         return aruco_locs
-
