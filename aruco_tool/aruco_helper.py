@@ -11,11 +11,21 @@ class ArucoHelper:
     """
 
     @staticmethod
-    def load_corners(self, file_loc):
+    def load_corners(self, file_loc, id):
         """
         Loads corner data that was saved as a csv previously, returns an ArucoCorner obj with imported data
         """
-        pass
+        # import csv
+        df = pd.read_csv(file_loc)  # TODO: should I parse the file_loc for information like id and folder loc?
+
+        # get numpy array
+        data = df.to_numpy()
+
+        # reformat to aruco-style corners array
+        data_len = len(data)
+        corners = np.reshape(data, (data_len, 4, 2)) # TODO: need to double check I have right order
+        
+        return ArucoCorner(id, corners)
 
 
     @staticmethod
@@ -25,24 +35,16 @@ class ArucoHelper:
         """
         df = pd.read_csv(file_loc)  # TODO: should I parse the file_loc for information like id and folder loc?
         
-        # convert dataframe to numpy array
+        # convert dataframe to numpy array, format is correct
         data = df.to_numpy()
 
         return ArucoLoc(id, data)
 
 
     @staticmethod
-    def view_data_video(acode, include_corners=False, include_pose=False):
-        """
-        Shows image stream as a video. Useful for debugging. 
-        """
-        pass
-
-
-    @staticmethod
     def show_image(file_loc, include_corners=False, marker_size=3):
         """
-        Show an image 
+        Show an image, can include the detected corners as red squares
         """
         img = cv2.imread(file_loc, cv2.IMREAD_COLOR)
 
@@ -62,10 +64,27 @@ class ArucoHelper:
                     x2 = cs[0]+marker_size
                     y2 = cs[1]-marker_size
 
+                    # TODO: enable user to set color?
                     cv2.rectangle(img, (int(x1), int(y1)), (int(x2), int(y2)), (0,0,255), -1)
                 
         cv2.imshow(f"{file_loc}", img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
+
+    @staticmethod
+    def view_data_video(acode, include_corners=False):
+        """
+        Shows image stream as a video. Useful for debugging. 
+        """
+        try:
+            # get folder location of the aruco code
+            folder_loc = acode.folder_loc
+        except:
+            raise Exception("ArucoCorner object does not have a folder location associated with it")
+
+        pass
+
+        
+        
 

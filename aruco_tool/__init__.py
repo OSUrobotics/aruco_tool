@@ -14,4 +14,7 @@ from .pose_detector import PoseDetector
 from .aruco_loc import ArucoLoc
 from .aruco_func import ArucoFunc
 from .aruco_helper import ArucoHelper
-from .aruco_helper.ArucoHelper import load_poses, show_image
+
+load_corners = ArucoHelper.load_corners
+load_poses = ArucoHelper.load_poses
+show_image = ArucoHelper.show_image
