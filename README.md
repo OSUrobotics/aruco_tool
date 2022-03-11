@@ -9,14 +9,19 @@ Highly recommend installing these packages separately before pip installing this
 * **cv2** (*need opencv-contrib-python package for aruco*)
 * **matplotlib**
 
-## Workflow
-Aruco detects corners of the code, then converts that to pose. Right now, the pose is calculated relatively, as a differential from the first pose detected of the id. Will update this with more analysis modes in the future.
+## Quick-Start Guide
+Aruco detects corners of the code, then converts that to pose. Right now, the pose is calculated relatively, as a differential from the first pose detected of the id. Please see documentation for more details.
 
-When entering file folder locations, please use absolute paths for now.
+Will update this with more analysis modes in the future.
+
+When entering file folder locations, please use absolute paths.
+
 
 ### Finding corners
 ```python
-    cf = CornerFinder("[Enter Folder with Images Here]", data_name=None, ar_dict=None, ar_params=None, desired_ids=None)
+    aruco_dict = aruco.getPredefinedDictionary(aruco.DICT_4X4_250) # or another dictionary
+    aruco_params = aruco.DetectorParameters_create()
+    cf = CornerFinder("absolute/folder/location", ar_dict=aruco_dict, ar_params=aruco_params, data_name="optional label", desired_ids=None)
     ids_found = cf.corner_analysis()
 ```
 
@@ -32,7 +37,7 @@ Data is stored as numpy arrays in an `ArucoCorner` object. There is one `ArucoCo
 
 ### Converting corner data to pose data
 ```python
-    pdetect = PoseDetector(["1 ArucoCorner object"], ["Camera Calibration"], ["radial and tangential dists"], ["marker side dimensions"], ["processing freq (use 1)"])
+    pdetect = PoseDetector(ac (ArucoCorner obj), opencv-camera-calibration, opencv_radial_and_tangential_dists, marker_side_dimensions (float), processing_freq (float, not-used))
     aloc = pdetect.find_marker_locations()
 
 ```
@@ -49,26 +54,30 @@ Data is stored as numpy arrays in an `ArucoLoc` object. Repeat this process for 
 ### Stream-lined process
 Aruco_tool also provides simple, one-line functions for aruco analysis, located in the `ArucoFunc` object. The functions above are mainly designed for sets of images, however these functions provide the ability to selectively run on one image.
 ```python
-    af = ArucoFunc(mtx, dist, marker_side_dims)  # stores analysis variables, by default provides my attributes
+    from aruco_tool import ArucoFunc
+    af = ArucoFunc(opencv-camera-calibration, opencv_radial_and_tangential_dists, marker_side_dimensions (float))  # stores analysis variables, by default provides my attributes
     
     # run on a single image with one id to track
-    pose_array = af.single_image_analysis_single_id(["file location"], desired_id_num)
+    pose_array = af.single_image_analysis_single_id("absolute/file/location", desired_id_num)
 
     # run on a set of images with one id to track
-    aruco_loc = af.full_analysis_single_id(["folder location of files"], desired_id_num)
+    aruco_loc = af.full_analysis_single_id("absolute/folder/location", desired_id_num)
 
     # run on a single image, track multiple ids or grab all ids in img
-    set_of_aruco_locs = af.single_image_analysis(["file location"], desired_ids=None) # if none, grabs all ids in image, otherwise you can specify using a list
+    set_of_aruco_locs = af.single_image_analysis("absolute/file/location", desired_ids=None (list)) # if none, grabs all ids in image, otherwise you can specify using a list
 
     # run on a set of images, track multiple ids or grab all ids in imgs
-    set_of_aruco_locs = af.full_analysis(["folder location of files"], desired_ids=None)
+    set_of_aruco_locs = af.full_analysis("absolute/folder/location", desired_ids=None (list))
 ```
 
 ### Extra Helper Functions
-Aruco_tool also provides extra functions for visualization and debugging.
+Aruco_tool also provides extra functions for visualization and debugging. These functions can be imported directly.
 ```python
-    ArucoHelper.load_poses(["file location"])  # loads csv of pose data into an ArucoLoc object
-    ArucoHelper.show_image(["file location"], include_corners=False, marker_size=3)  # shows an image, can choose to show detected corners on the image with the indicated marker size
+    from aruco_tool import load_corners, load_poses, show_image
+
+    a_corner_obj = load_corners("absolute/file/location")
+    a_loc_obj = load_poses("absolute/file/location")  # loads csv of pose data into an ArucoLoc object
+    show_image(["absolute/file/location", include_corners (bool), marker_size (float))  # shows an image, can choose to show detected corners on the image with the indicated marker size
 
 ```
 
