@@ -3,7 +3,6 @@ Specifically testing package's ability to analyze image(s) for aruco code corner
 """
 
 #import pytest
-import pdb
 import numpy as np
 from cv2 import aruco
 from aruco_tool import CornerFinder, ArucoCorner
