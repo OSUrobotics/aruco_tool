@@ -10,11 +10,12 @@ class ArucoCorner:
     
     def __init__(self, id_num, corners, data_attributes=None, file_folder=None):
         """ 
-        Creates the object. Will also save the data as a pandas dataframe
+        Creates the object
         """
+        # TODO: add aruco dictionary and params to this, so pose_detector can use it later
         self.id = id_num
         self.name = data_attributes  # TODO: a dictionary that contains the relevant name data -> since different projects will have different attributes for the data
-        self.file_loc = file_folder # location of the data, if none, it will do it in the current location
+        self.folder_loc = file_folder # location of the data, if none, it will do it in the current location
 
         self.corners = corners
         self.data_len = len(corners)
@@ -22,7 +23,7 @@ class ArucoCorner:
 
     
     def reshape_corners(self):
-        return self.corners.reshape(6, 8)
+        return self.corners.reshape(self.data_len, 8)
 
 
     def gen_corners_df(self):
@@ -33,12 +34,26 @@ class ArucoCorner:
         return pd.DataFrame(reshaped_c, columns=["x1","y1","x2","y2","x3","y3","x4","y4"])
 
 
-    def yield_corners(self):
+    def yield_corners(self, use_reshaped=True):
         """
         Yields the corners for each row, as numpy array
         """
-        for r in self.corners:
-            yield r
+        if use_reshaped:
+            corners_to_use = self.reshape_corners()
+        else:
+            corners_to_use = self.corners
+
+        for i, r in enumerate(corners_to_use):
+            yield i, r
+
+
+    def get_init_corner(self):
+        """
+        Gets the first corner that isn't a np.nan value 
+        """
+        for i, r in enumerate(self.corners):
+            if not np.all(np.isnan(r)): # if the row is not all np.nan, then we want it
+                return i, r
 
 
     def save_corners(self, file_name_overwrite=None):
@@ -49,7 +64,7 @@ class ArucoCorner:
         data = self.gen_corners_df()
 
         if file_name_overwrite is None:
-            file_name = f"{self.id}_corners_{self.file_loc.replace('/', '_')}"
+            file_name = f"{self.id}_ar_corners_{self.folder_loc.replace('/', '_')}"
             new_file_name = file_name + ".csv"
 
         else:
@@ -97,7 +112,6 @@ class ArucoCorner:
         Overwrites previous moving average calculations.
         :param window_size: size of moving average. Defaults to 3.
         """
-        # TODO: makes a bunch of nan values at end of data
         corners = self.reshape_corners()
 
         # what we want to do is remove any nans at the end of a file (if the id disapeared), run the moving average, and then add them back - the moving average function overwrites nan's at the end of a data stream
@@ -156,5 +170,3 @@ class ArucoCorner:
         return full_filtered_data
 
 
-#if __name__ == "__main__":
-#    pass

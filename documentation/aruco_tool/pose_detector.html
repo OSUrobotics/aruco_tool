@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>aruco_tool.pose_detector API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>aruco_tool.pose_detector</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import os 
+import cv2
+import numpy as np
+from pathlib import Path
+from cv2 import aruco
+import pdb
+from .aruco_loc import ArucoLoc
+
+# for me:
+&#34;&#34;&#34; 
+mtx = np.array(((617.0026849655, -0.153855356, 315.5900337131),  # fx, s,cx
+                            (0, 614.4461785395, 243.0005874753),  # 0,fy,cy
+                            (0, 0, 1)))
+
+dist = np.array((0.1611730644, -0.3392379107, 0.0010744837, 0.000905697))
+&#34;&#34;&#34;
+
+
+class PoseDetector:
+    &#34;&#34;&#34;
+    Takes an ArucoCorner object and converts its corner locations to object pose, given provided configuration settings
+    &#34;&#34;&#34;
+    def __init__(self, corner_obj, camera_calib, dists, side_dims, freq):
+        self.id = corner_obj.id
+        self.aruco_corner = corner_obj
+        
+        self.mtx = camera_calib
+        self.dist = dists
+
+        self.marker_side_dims = side_dims
+        self.processing_freq = freq  # take data at every x values
+
+
+    def find_marker_locations(self):
+        &#34;&#34;&#34;
+        Calculates poses and outputs that data as ArucoLoc objects 
+        &#34;&#34;&#34;
+        poses = self.calc_poses()
+
+        return ArucoLoc(self.id, poses, file_folder=self.aruco_corner.file_loc)
+
+
+    def calc_poses(self, rel_pos=True):
+        &#34;&#34;&#34;
+        Returns calculates poses for the given ArucoCorner object
+        &#34;&#34;&#34;
+        
+        # pre-allocate the numpy array space
+        data_len = self.aruco_corner.data_len
+
+        pose_data = np.full((data_len, 8), np.nan)
+
+        # get the initial pose (even if no relative pose, still need this for calculating the rotation magnitude) 
+        #first_corners
+        _, init_corners = self.aruco_corner.get_init_corner()
+        [init_rvec, init_tvec] = self._calc_single_pose(init_corners) # TODO: should we make it stricter, so that its guaranteed there are no np.nan?
+
+        # go through corners, calculate poses
+        for i, next_corners in self.aruco_corner.yield_corners(use_reshaped=False):
+            try:
+                # if its all nans, just skip calculation
+                if np.all(np.isnan(next_corners)):
+                    raise Exception(&#34;Row of nans, skipping calculation&#34;)
+
+                [next_rvec, next_tvec] = self._calc_single_pose(next_corners)
+
+                rel_angle = self._angle_between(init_corners[0] - init_corners[2], next_corners[0] - next_corners[2])
+                rel_rvec, rel_tvec = self._relative_position(init_rvec, init_tvec, next_rvec, next_tvec)
+
+                translation_val = np.round(np.linalg.norm(rel_tvec), 4)
+                rotation_val = rel_angle * 180 / np.pi
+
+                # found the stack overflow for it?
+                # https://stackoverflow.com/questions/51270649/aruco-marker-world-coordinates
+                rotM = np.zeros(shape=(3, 3))
+                cv2.Rodrigues(rel_rvec, rotM, jacobian=0)
+                ypr = cv2.RQDecomp3x3(rotM)  # TODO: not sure what we did with this earlier... need to check
+
+                row_data = [rel_tvec[0][0], rel_tvec[1][0], rel_tvec[2][0], translation_val, rel_rvec[0][0], rel_rvec[1][0], rel_rvec[2][0], rotation_val]
+                
+                #total_successes += 1
+            except Exception as e:
+                #print(f&#34;Error with ARuco corners in image {i}.&#34;)
+                #print(e)
+                # rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
+                # translation_val = np.nan
+                # rotation_val = np.nan
+                row_data = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            
+            # put into numpy array
+            # tvec (3), tmag, rvec (3), rmag
+            
+            pose_data[i] = row_data
+
+        return np.around(pose_data, decimals=3)
+
+
+    def _calc_single_pose(self, corner_set):
+        &#34;&#34;&#34;
+        Estimates pose in a single image. 
+        &#34;&#34;&#34;
+        # if np.all(np.isnan(corner_set)):
+        #     print(&#34;all are nan&#34;)
+        
+        rvec, tvec, _ = aruco.estimatePoseSingleMarkers([corner_set], self.marker_side_dims, self.mtx, self.dist)
+
+        pose = np.concatenate((rvec, tvec))
+        
+        return pose #[rvec, tvec]
+
+
+    def _unit_vector(self, vector):
+        &#34;&#34;&#34; Returns the unit vector of the vector.  &#34;&#34;&#34;
+        return vector / np.linalg.norm(vector)
+
+
+    def _angle_between(self, v1, v2):
+        &#34;&#34;&#34; Returns the angle in radians between vectors &#39;v1&#39; and &#39;v2&#39;::
+
+                example 1) angle_between((1, 0, 0), (0, 1, 0))
+                1.5707963267948966
+                example 2) angle_between((1, 0, 0), (1, 0, 0))
+                0.0
+                example 3) angle_between((1, 0, 0), (-1, 0, 0))
+                3.141592653589793
+                *ahem* https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
+                (look at highest voted answer, then scroll down to sgt_pepper and crizCraig&#39;s answer
+        &#34;&#34;&#34;
+        v1_u = self._unit_vector(v1)
+        v2_u = self._unit_vector(v2)
+
+        minor = np.linalg.det(
+            np.stack((v1_u[-2:], v2_u[-2:]))
+        )
+
+        if minor == 0:
+            sign = 1
+        else:
+            sign = -np.sign(minor)
+
+        dot_p = np.dot(v1_u, v2_u)
+        dot_p = min(max(dot_p, -1.0), 1.0)
+        return sign * np.arccos(dot_p)
+
+        # # sgt_pepper
+        # if minor == 0:
+        #     raise NotImplementedError(&#39;Too odd vectors =(&#39;)
+        # return np.sign(minor) * np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+        # # original
+        #return np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+
+    def _relative_position(self, rvec1, tvec1, rvec2, tvec2):
+        rvec1, tvec1 = np.expand_dims(rvec1.squeeze(),1), np.expand_dims(tvec1.squeeze(),1)
+        rvec2, tvec2 = np.expand_dims(rvec2.squeeze(),1), np.expand_dims(tvec2.squeeze(),1)
+        invRvec, invTvec = self._inverse_perspective(rvec2, tvec2)
+
+        orgRvec, orgTvec = self._inverse_perspective(invRvec, invTvec)
+
+        info = cv2.composeRT(rvec1, tvec1, invRvec, invTvec)
+        composedRvec, composedTvec = info[0], info[1]
+
+        composedRvec = composedRvec.reshape((3, 1))
+        composedTvec = composedTvec.reshape((3, 1))
+
+        return composedRvec, composedTvec
+
+    def _inverse_perspective(self, rvec, tvec):
+        &#34;&#34;&#34;
+        found you! https://aliyasineser.medium.com/calculation-relative-positions-of-aruco-markers-eee9cc4036e3
+        &#34;&#34;&#34;
+        # print(rvec)
+        # print(np.matrix(rvec[0]).T)
+        R, _ = cv2.Rodrigues(rvec)
+        R = np.matrix(R).T
+        invTvec = np.dot(-R, np.matrix(tvec))
+        invRvec, _ = cv2.Rodrigues(R)
+        return invRvec, invTvec</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="aruco_tool.pose_detector.PoseDetector"><code class="flex name class">
+<span>class <span class="ident">PoseDetector</span></span>
+<span>(</span><span>corner_obj, camera_calib, dists, side_dims, freq)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes an ArucoCorner object and converts its corner locations to object pose, given provided configuration settings</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PoseDetector:
+    &#34;&#34;&#34;
+    Takes an ArucoCorner object and converts its corner locations to object pose, given provided configuration settings
+    &#34;&#34;&#34;
+    def __init__(self, corner_obj, camera_calib, dists, side_dims, freq):
+        self.id = corner_obj.id
+        self.aruco_corner = corner_obj
+        
+        self.mtx = camera_calib
+        self.dist = dists
+
+        self.marker_side_dims = side_dims
+        self.processing_freq = freq  # take data at every x values
+
+
+    def find_marker_locations(self):
+        &#34;&#34;&#34;
+        Calculates poses and outputs that data as ArucoLoc objects 
+        &#34;&#34;&#34;
+        poses = self.calc_poses()
+
+        return ArucoLoc(self.id, poses, file_folder=self.aruco_corner.file_loc)
+
+
+    def calc_poses(self, rel_pos=True):
+        &#34;&#34;&#34;
+        Returns calculates poses for the given ArucoCorner object
+        &#34;&#34;&#34;
+        
+        # pre-allocate the numpy array space
+        data_len = self.aruco_corner.data_len
+
+        pose_data = np.full((data_len, 8), np.nan)
+
+        # get the initial pose (even if no relative pose, still need this for calculating the rotation magnitude) 
+        #first_corners
+        _, init_corners = self.aruco_corner.get_init_corner()
+        [init_rvec, init_tvec] = self._calc_single_pose(init_corners) # TODO: should we make it stricter, so that its guaranteed there are no np.nan?
+
+        # go through corners, calculate poses
+        for i, next_corners in self.aruco_corner.yield_corners(use_reshaped=False):
+            try:
+                # if its all nans, just skip calculation
+                if np.all(np.isnan(next_corners)):
+                    raise Exception(&#34;Row of nans, skipping calculation&#34;)
+
+                [next_rvec, next_tvec] = self._calc_single_pose(next_corners)
+
+                rel_angle = self._angle_between(init_corners[0] - init_corners[2], next_corners[0] - next_corners[2])
+                rel_rvec, rel_tvec = self._relative_position(init_rvec, init_tvec, next_rvec, next_tvec)
+
+                translation_val = np.round(np.linalg.norm(rel_tvec), 4)
+                rotation_val = rel_angle * 180 / np.pi
+
+                # found the stack overflow for it?
+                # https://stackoverflow.com/questions/51270649/aruco-marker-world-coordinates
+                rotM = np.zeros(shape=(3, 3))
+                cv2.Rodrigues(rel_rvec, rotM, jacobian=0)
+                ypr = cv2.RQDecomp3x3(rotM)  # TODO: not sure what we did with this earlier... need to check
+
+                row_data = [rel_tvec[0][0], rel_tvec[1][0], rel_tvec[2][0], translation_val, rel_rvec[0][0], rel_rvec[1][0], rel_rvec[2][0], rotation_val]
+                
+                #total_successes += 1
+            except Exception as e:
+                #print(f&#34;Error with ARuco corners in image {i}.&#34;)
+                #print(e)
+                # rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
+                # translation_val = np.nan
+                # rotation_val = np.nan
+                row_data = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            
+            # put into numpy array
+            # tvec (3), tmag, rvec (3), rmag
+            
+            pose_data[i] = row_data
+
+        return np.around(pose_data, decimals=3)
+
+
+    def _calc_single_pose(self, corner_set):
+        &#34;&#34;&#34;
+        Estimates pose in a single image. 
+        &#34;&#34;&#34;
+        # if np.all(np.isnan(corner_set)):
+        #     print(&#34;all are nan&#34;)
+        
+        rvec, tvec, _ = aruco.estimatePoseSingleMarkers([corner_set], self.marker_side_dims, self.mtx, self.dist)
+
+        pose = np.concatenate((rvec, tvec))
+        
+        return pose #[rvec, tvec]
+
+
+    def _unit_vector(self, vector):
+        &#34;&#34;&#34; Returns the unit vector of the vector.  &#34;&#34;&#34;
+        return vector / np.linalg.norm(vector)
+
+
+    def _angle_between(self, v1, v2):
+        &#34;&#34;&#34; Returns the angle in radians between vectors &#39;v1&#39; and &#39;v2&#39;::
+
+                example 1) angle_between((1, 0, 0), (0, 1, 0))
+                1.5707963267948966
+                example 2) angle_between((1, 0, 0), (1, 0, 0))
+                0.0
+                example 3) angle_between((1, 0, 0), (-1, 0, 0))
+                3.141592653589793
+                *ahem* https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
+                (look at highest voted answer, then scroll down to sgt_pepper and crizCraig&#39;s answer
+        &#34;&#34;&#34;
+        v1_u = self._unit_vector(v1)
+        v2_u = self._unit_vector(v2)
+
+        minor = np.linalg.det(
+            np.stack((v1_u[-2:], v2_u[-2:]))
+        )
+
+        if minor == 0:
+            sign = 1
+        else:
+            sign = -np.sign(minor)
+
+        dot_p = np.dot(v1_u, v2_u)
+        dot_p = min(max(dot_p, -1.0), 1.0)
+        return sign * np.arccos(dot_p)
+
+        # # sgt_pepper
+        # if minor == 0:
+        #     raise NotImplementedError(&#39;Too odd vectors =(&#39;)
+        # return np.sign(minor) * np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+        # # original
+        #return np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+
+    def _relative_position(self, rvec1, tvec1, rvec2, tvec2):
+        rvec1, tvec1 = np.expand_dims(rvec1.squeeze(),1), np.expand_dims(tvec1.squeeze(),1)
+        rvec2, tvec2 = np.expand_dims(rvec2.squeeze(),1), np.expand_dims(tvec2.squeeze(),1)
+        invRvec, invTvec = self._inverse_perspective(rvec2, tvec2)
+
+        orgRvec, orgTvec = self._inverse_perspective(invRvec, invTvec)
+
+        info = cv2.composeRT(rvec1, tvec1, invRvec, invTvec)
+        composedRvec, composedTvec = info[0], info[1]
+
+        composedRvec = composedRvec.reshape((3, 1))
+        composedTvec = composedTvec.reshape((3, 1))
+
+        return composedRvec, composedTvec
+
+    def _inverse_perspective(self, rvec, tvec):
+        &#34;&#34;&#34;
+        found you! https://aliyasineser.medium.com/calculation-relative-positions-of-aruco-markers-eee9cc4036e3
+        &#34;&#34;&#34;
+        # print(rvec)
+        # print(np.matrix(rvec[0]).T)
+        R, _ = cv2.Rodrigues(rvec)
+        R = np.matrix(R).T
+        invTvec = np.dot(-R, np.matrix(tvec))
+        invRvec, _ = cv2.Rodrigues(R)
+        return invRvec, invTvec</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="aruco_tool.pose_detector.PoseDetector.calc_poses"><code class="name flex">
+<span>def <span class="ident">calc_poses</span></span>(<span>self, rel_pos=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns calculates poses for the given ArucoCorner object</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_poses(self, rel_pos=True):
+    &#34;&#34;&#34;
+    Returns calculates poses for the given ArucoCorner object
+    &#34;&#34;&#34;
+    
+    # pre-allocate the numpy array space
+    data_len = self.aruco_corner.data_len
+
+    pose_data = np.full((data_len, 8), np.nan)
+
+    # get the initial pose (even if no relative pose, still need this for calculating the rotation magnitude) 
+    #first_corners
+    _, init_corners = self.aruco_corner.get_init_corner()
+    [init_rvec, init_tvec] = self._calc_single_pose(init_corners) # TODO: should we make it stricter, so that its guaranteed there are no np.nan?
+
+    # go through corners, calculate poses
+    for i, next_corners in self.aruco_corner.yield_corners(use_reshaped=False):
+        try:
+            # if its all nans, just skip calculation
+            if np.all(np.isnan(next_corners)):
+                raise Exception(&#34;Row of nans, skipping calculation&#34;)
+
+            [next_rvec, next_tvec] = self._calc_single_pose(next_corners)
+
+            rel_angle = self._angle_between(init_corners[0] - init_corners[2], next_corners[0] - next_corners[2])
+            rel_rvec, rel_tvec = self._relative_position(init_rvec, init_tvec, next_rvec, next_tvec)
+
+            translation_val = np.round(np.linalg.norm(rel_tvec), 4)
+            rotation_val = rel_angle * 180 / np.pi
+
+            # found the stack overflow for it?
+            # https://stackoverflow.com/questions/51270649/aruco-marker-world-coordinates
+            rotM = np.zeros(shape=(3, 3))
+            cv2.Rodrigues(rel_rvec, rotM, jacobian=0)
+            ypr = cv2.RQDecomp3x3(rotM)  # TODO: not sure what we did with this earlier... need to check
+
+            row_data = [rel_tvec[0][0], rel_tvec[1][0], rel_tvec[2][0], translation_val, rel_rvec[0][0], rel_rvec[1][0], rel_rvec[2][0], rotation_val]
+            
+            #total_successes += 1
+        except Exception as e:
+            #print(f&#34;Error with ARuco corners in image {i}.&#34;)
+            #print(e)
+            # rel_rvec, rel_tvec = (np.nan, np.nan, np.nan), (np.nan, np.nan, np.nan)
+            # translation_val = np.nan
+            # rotation_val = np.nan
+            row_data = [np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+        
+        # put into numpy array
+        # tvec (3), tmag, rvec (3), rmag
+        
+        pose_data[i] = row_data
+
+    return np.around(pose_data, decimals=3)</code></pre>
+</details>
+</dd>
+<dt id="aruco_tool.pose_detector.PoseDetector.find_marker_locations"><code class="name flex">
+<span>def <span class="ident">find_marker_locations</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates poses and outputs that data as ArucoLoc objects</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_marker_locations(self):
+    &#34;&#34;&#34;
+    Calculates poses and outputs that data as ArucoLoc objects 
+    &#34;&#34;&#34;
+    poses = self.calc_poses()
+
+    return ArucoLoc(self.id, poses, file_folder=self.aruco_corner.file_loc)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="aruco_tool" href="index.html">aruco_tool</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="aruco_tool.pose_detector.PoseDetector" href="#aruco_tool.pose_detector.PoseDetector">PoseDetector</a></code></h4>
+<ul class="">
+<li><code><a title="aruco_tool.pose_detector.PoseDetector.calc_poses" href="#aruco_tool.pose_detector.PoseDetector.calc_poses">calc_poses</a></code></li>
+<li><code><a title="aruco_tool.pose_detector.PoseDetector.find_marker_locations" href="#aruco_tool.pose_detector.PoseDetector.find_marker_locations">find_marker_locations</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
