@@ -87,7 +87,7 @@ class ArucoLoc:
             data_cut = self.data_len - data_stop + 1
             actual_data = poses[0:data_cut, :]
 
-        actual_df = pd.DataFrame(actual_data, columns=["x1","y1","x2","y2","x3","y3","x4","y4"])
+        actual_df = pd.DataFrame(actual_data, columns=["x","y","z","tmag","roll","pitch","yaw","rmag"])
 
         # I convert to dataframes because the pandas implementation for moving average is exactly what I need
         filtered_df = pd.DataFrame()

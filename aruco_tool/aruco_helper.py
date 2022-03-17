@@ -1,6 +1,8 @@
 import cv2
 from cv2 import aruco
 import pdb
+import pandas as pd
+import numpy as np
 from .corner_finder import CornerFinder
 from .aruco_corner import ArucoCorner
 from .aruco_loc import ArucoLoc
@@ -23,7 +25,9 @@ class ArucoHelper:
 
         # reformat to aruco-style corners array
         data_len = len(data)
-        corners = np.reshape(data, (data_len, 4, 2)) # TODO: need to double check I have right order
+
+        # can't include the frame number that you get from pandas
+        corners = np.reshape(data[:, 1:9], (data_len, 4, 2)) # TODO: need to double check I have right order
         
         return ArucoCorner(id, corners)
 

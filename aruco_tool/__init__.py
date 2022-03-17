@@ -1,10 +1,10 @@
 """
 aruco_tool
 
-Aruco Code pose detection library for use in my lab projects. 
+Aruco Code pose detection package to make the process simpler and a little more organized.
 """
 
-__version__ = "0.3.6"
+__version__ = "0.3.7"
 __author__ = 'John Morrow'
 __credits__ = 'Oregon State University'
 

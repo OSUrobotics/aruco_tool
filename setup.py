@@ -7,10 +7,10 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='aruco_tool',
-    version='0.3.6',    
-    description='Aruco Code pose detection library for use in my lab projects.',
+    version='0.3.7',    
+    description='Aruco Code pose detection package to make the process simpler and a little more organized.',
     url='https://github.com/NotCras/aruco_tool/',
-    download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.6.tar.gz',
+    download_url='https://github.com/NotCras/aruco_tool/archive/refs/tags/v0.3.7.tar.gz',
     author='John Morrow',
     author_email='morrowjo@oregonstate.edu',
     license='MIT',
@@ -27,7 +27,7 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',  
         'Operating System :: POSIX :: Linux',        
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.8, 3.9',
     ],
     long_description=long_description,
     long_description_content_type='text/markdown'
