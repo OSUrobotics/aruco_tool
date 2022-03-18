@@ -9,7 +9,13 @@ Highly recommend installing these packages separately before pip installing this
 * **opencv-contrib-python**
 * **matplotlib**
 
-## Quick-Start Guide
+## Install with Pip
+
+For now, package is on testpypi. Install using this command:
+`pip install -i https://test.pypi.org/simple/ aruco-tool`
+
+
+# Quick-Start Guide
 Aruco detects corners of the code, then converts that to pose. Right now, the pose is calculated relatively, as a differential from the first pose detected of the id. Please see our documentation and the [aruco documentation](https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html) for more details.
 
 Will update this with more analysis modes in the future.
@@ -17,7 +23,7 @@ Will update this with more analysis modes in the future.
 *Note:* OpenCV doesn't work well [with python pathlib](https://stackoverflow.com/questions/68898624/using-opencv-imread-and-imwrite-with-python-path-objects-gives-systemerror-bui), for now we also don't handle pathlib Paths. Please make sure to convert your paths to str, if you are using pathlib. Otherwise, please provide the absolute path for your files.
 
 
-### Finding corners
+## Finding corners
 ```python
     from aruco_tool import CornerFinder
 
@@ -44,7 +50,7 @@ Corner location data is stored as numpy arrays in an `ArucoCorner` object. There
     df = ac.gen_corners_df() # generates a pandas dataframe of the corners
 ```
 
-### Converting corner data to pose data
+## Converting corner data to pose data
 Remember to get your camera matrix and dist coeffs from camera calibration. 
 
 ```python
@@ -67,7 +73,7 @@ Pose data is stored as numpy arrays in an `ArucoLoc` object for a single id. Rep
 ```
 
 
-### Stream-lined process
+## Stream-lined process
 Aruco_tool also provides simple, one-line functions for aruco analysis, located in the `ArucoFunc` object. The functions above are mainly designed for sets of images, however these functions provide the ability to selectively run on one image.
 ```python
     from aruco_tool import ArucoFunc
@@ -90,17 +96,18 @@ Aruco_tool also provides simple, one-line functions for aruco analysis, located 
     set_of_aruco_locs = af.full_analysis(folder, desired_ids=None (list))
 ```
 
-### Extra Helper Functions
+## Extra Helper Functions
 Aruco_tool also provides extra functions for visualization and debugging. These functions can be imported directly.
 ```python
     from aruco_tool import load_corners, load_poses, show_image
 
     # see note above
+    id_num = 3
     file = str( Path(__file__).parent.resolve() / "file_location.csv" )
     img_file = str( Path(__file__).parent.resolve() / "file_location.jpg" )
 
-    a_corner_obj = load_corners(file)
-    a_loc_obj = load_poses(file)  # loads csv of pose data into an ArucoLoc object
+    a_corner_obj = load_corners(file, id_num)
+    a_loc_obj = load_poses(file, id_num)  # loads csv of pose data into an ArucoLoc object
     show_image(img_file, include_corners (bool), marker_size (float))  # shows an image, can choose to show detected corners on the image with the indicated marker size
 
 ```

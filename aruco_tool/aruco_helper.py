@@ -42,6 +42,12 @@ class ArucoHelper:
         # convert dataframe to numpy array, format is correct
         data = df.to_numpy()
 
+        # reformat to aruco-style corners array
+        data_len = len(data)
+
+	    # can't include the frame number that you get from pandas
+        poses = data[:, 1:9] # TODO: need to double check I have right order
+
         return ArucoLoc(id, data)
 
 
