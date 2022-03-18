@@ -4,7 +4,7 @@ aruco_tool
 Aruco Code pose detection package to make the process simpler and a little more organized.
 """
 
-__version__ = "0.3.7"
+__version__ = "0.3.8"
 __author__ = 'John Morrow'
 __credits__ = 'Oregon State University'
 

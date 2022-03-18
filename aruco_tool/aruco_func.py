@@ -15,20 +15,24 @@ class ArucoFunc:
     """
     def __init__(self, mtx=None, dist=None, marker_side_dims=None):
         """ 
-        Input camera settings for aruco analysis
+        Input camera settings for aruco analysis. Default parameters are for images not from cameras.
         """
 
         # camera calibration
         if mtx is None:
-            self.mtx = np.array(((617.0026849655, -0.153855356, 315.5900337131),  # fx, s,cx
-                                (0, 614.4461785395, 243.0005874753),  # 0,fy,cy
+            # self.mtx = np.array(((617.0026849655, -0.153855356, 315.5900337131),  # fx, s,cx
+            #                     (0, 614.4461785395, 243.0005874753),  # 0,fy,cy
+            #                     (0, 0, 1)))
+            self.mtx = np.array(((1, 1, 1),  # fx, s,cx
+                                (0, 1, 1),  # 0,fy,cy
                                 (0, 0, 1)))
         else:
             self.mtx = mtx
         
         if dist is None:
             # k1,k2,p1,p2 ie radial dist and tangential dist
-            self.dist = np.array((0.1611730644, -0.3392379107, 0.0010744837, 0.000905697))
+            #self.dist = np.array((0.1611730644, -0.3392379107, 0.0010744837, 0.000905697))
+            self.dist = np.array((0, 0, 0, 0))
         else:
             self.dist = dist
 
